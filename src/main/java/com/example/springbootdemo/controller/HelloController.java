@@ -27,7 +27,7 @@ public class HelloController {
 //http://localhost:8080/helloUser2
     public String helloUser2(User user) {
         System.out.println(user);
-        System.out.println(user.getUserName());
+        System.out.println(user.getUsername());
         return "hhah sunrui" + user;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.springbootdemo.controller;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +12,7 @@ import java.util.Date;
 
 @RestController
 public class FileUpload {
-
+    @ApiOperation("文件上传")
     @PostMapping("/upload")
     public String up(String nickname, MultipartFile photo, HttpServletRequest request) throws IOException {
         System.out.println(nickname);

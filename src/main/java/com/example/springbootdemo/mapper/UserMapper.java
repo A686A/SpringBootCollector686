@@ -22,7 +22,7 @@ public interface UserMapper extends BaseMapper<User> {
 
 
     //   查询用户及其所有的订单
-    @Select("select * from t_user")
+    @Select("select * from user")
     @Results(
             {
                     @Result(column = "id",property = "id"),
@@ -30,7 +30,7 @@ public interface UserMapper extends BaseMapper<User> {
                     @Result(column = "password",property = "password"),
                     @Result(column = "birthday",property = "birthday"),
                     @Result(column = "id",property = "orders",javaType = List.class,
-                            many=@Many(select = "com.example.mpdemo.mapper.OrderMapper.selectByUid")
+                            many=@Many(select = "com.example.springbootdemo.mapper.OrderMapper.selectByUid")
                     )
             }
     )

@@ -56,6 +56,7 @@ public class UserController {
     }
 
     //  分页查询
+//    List<Employee> result = employeeMapper.selectPage(new Page<>(1, 2),ew.between("id",1,20).eq("gender","F"));
     @GetMapping("/user/findByPage")
     public IPage findByPage(){
         //设置起始值及每页条数

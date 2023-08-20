@@ -9,10 +9,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
@@ -49,4 +47,21 @@ public class RestTemplateController {
 
             return responseEntity.getBody();
     }
+
+    //http://localhost:8080/RestTemplateTest
+    @GetMapping("/RestTemplateTest")
+    public String restTemplateTest(){
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders httpHeaders =new HttpHeaders();
+        //httpHeaders.set("accseeToken","213");
+        HttpEntity httpEntity =new HttpEntity<>(httpHeaders);
+            String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id=jspdguspq1npfmor&app_secret=8h0quBz6wCZ3NG0o6NSaBpv5vjS27Vfc";
+            ResponseEntity<String> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET,httpEntity,String.class);
+
+            if (200 == responseEntity.getStatusCodeValue()) {
+                return responseEntity.getBody();
+            } else {
+                return "error with code : " + responseEntity.getStatusCodeValue();
+            }
+        }
 }

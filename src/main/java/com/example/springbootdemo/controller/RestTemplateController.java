@@ -1,8 +1,7 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.config.CustomErrorHandler;
+import com.example.springbootdemo.handler.CustomErrorHandler;
 import com.example.springbootdemo.entity.Group;
-import com.example.springbootdemo.entity.User;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -12,8 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
 
 /**
  *resttemplate

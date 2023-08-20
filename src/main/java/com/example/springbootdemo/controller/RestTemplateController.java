@@ -52,7 +52,7 @@ public class RestTemplateController {
         HttpHeaders httpHeaders =new HttpHeaders();
         //httpHeaders.set("accseeToken","213");
         HttpEntity httpEntity =new HttpEntity<>(httpHeaders);
-            String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id=jspdguspq1npfmor&app_secret=8h0quBz6wCZ3NG0o6NSaBpv5vjS27Vfc";
+            String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id=jspdgus&app_secret=8h";
             ResponseEntity<String> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET,httpEntity,String.class);
 
             if (200 == responseEntity.getStatusCodeValue()) {

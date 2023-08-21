@@ -22,7 +22,10 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateController {
     @Value("${url.testtemplateurl}")
     String urltest;
-
+    @Value("${Acount.APP_ID}")
+    String appId;
+    @Value("${Acount.APP_SECRET}")
+    String appSecret;
     @GetMapping("/RestTemplate")
     public Group restTemplate(){
         HttpHeaders httpHeaders =new HttpHeaders();
@@ -54,7 +57,7 @@ public class RestTemplateController {
         HttpHeaders httpHeaders =new HttpHeaders();
         //httpHeaders.set("accseeToken","213");
         HttpEntity httpEntity =new HttpEntity<>(httpHeaders);
-            String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id=jspdgus&app_secret=8h";
+            String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id="+appId+"&app_secret="+appSecret;
             ResponseEntity<String> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET,httpEntity,String.class);
 
             if (200 == responseEntity.getStatusCodeValue()) {
@@ -66,10 +69,9 @@ public class RestTemplateController {
 
     //http://localhost:8080/RestTemplateDemo
     @GetMapping("/RestTemplateDemo")
-    public String restTemplateDemo(@NotNull@RequestHeader(value = "Content-Type")String contentType){
+    public String restTemplateDemo(){
 
-        System.out.println(contentType);
-        return contentType;
+        return null;
     }
 
 }

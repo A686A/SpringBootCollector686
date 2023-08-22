@@ -30,6 +30,7 @@ public class RestTemplateController {
     public Group restTemplate(){
         HttpHeaders httpHeaders =new HttpHeaders();
         httpHeaders.set("accseeToken","213");
+
         HttpEntity httpEntity =new HttpEntity<>(httpHeaders);
 
         RestTemplate restTemplate = new RestTemplate();

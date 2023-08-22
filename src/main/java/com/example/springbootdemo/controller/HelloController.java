@@ -37,14 +37,11 @@ public class HelloController {
     }
 
 
-    //http://localhost:8080/RestTemplateUser
-    @GetMapping("/RestTemplateUser")
-    public User RestTemplateUser() {
-       User user =new User();
-       user.setId(1);
-       user.setUsername("sun");
-       user.setBirthday("19970920");
-        return user;
+    //http://localhost:8080/MockMvcTest
+    @GetMapping("/MockMvcTest")
+    public String MockMvcTestr() {
+
+        return "MockMvcTest";
     }
 
     //http://localhost:8080/RestTemplateGroup

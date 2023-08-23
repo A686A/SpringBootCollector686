@@ -39,7 +39,7 @@ public class HelloController {
 
     //http://localhost:8080/MockMvcTest
     @GetMapping("/MockMvcTest")
-    public String MockMvcTestr() {
+    public String MockMvcTest() {
 
         return "MockMvcTest";
     }

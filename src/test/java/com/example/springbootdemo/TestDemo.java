@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import javax.annotation.Resource;
 //23.8.22
 //随机端口启动
-@SpringBootTest(classes = {SpringApplication.class},webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest()
 @AutoConfigureMockMvc
 public class TestDemo {
     @Resource
@@ -23,15 +23,15 @@ public class TestDemo {
     //@DisplayName("MockTest")测试名
     @Test
     public void TestMock() throws Exception {
-    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("MockMvcTest"))
+    MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/MockMvcTest"))
                 //.andExpect(MockMvcResultMatchers.status().isOk())  请求状态是ok 200
-                .andExpect(MockMvcResultMatchers.content().string("SUCCESS"))
+                .andExpect(MockMvcResultMatchers.content().string("MockMvcTest"))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
     @Test
     public void TestMockWithParameter() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("MockMvcTest")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/MockMvcTest")
                         .header("accessToken","686").param("cifNO","668"))
                 .andExpect(MockMvcResultMatchers.content().string("SUCCESS"))
                 .andExpect(MockMvcResultMatchers.jsonPath("accesstoken").value("688"))

@@ -1,18 +1,25 @@
 package com.example.springbootdemo.controller;
 
+import com.example.springbootdemo.entity.User;
 import com.example.springbootdemo.handler.CustomErrorHandler;
 import com.example.springbootdemo.entity.Group;
 
+import com.example.springbootdemo.service.RestTemplateService;
 import com.sun.istack.internal.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *resttemplate
@@ -22,10 +29,10 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateController {
     @Value("${url.testtemplateurl}")
     String urltest;
-    @Value("${Acount.APP_ID}")
-    String appId;
-    @Value("${Acount.APP_SECRET}")
-    String appSecret;
+    @Autowired
+    RestTemplateService restTemplateService;
+
+
     @GetMapping("/RestTemplate")
     public Group restTemplate(){
         HttpHeaders httpHeaders =new HttpHeaders();
@@ -54,18 +61,7 @@ public class RestTemplateController {
     //http://localhost:8080/RestTemplateTest
     @GetMapping("/RestTemplateTest")
     public String restTemplateTest(){
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders httpHeaders =new HttpHeaders();
-        //httpHeaders.set("accseeToken","213");
-        HttpEntity httpEntity =new HttpEntity<>(httpHeaders);
-            String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id="+appId+"&app_secret="+appSecret;
-            ResponseEntity<String> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET,httpEntity,String.class);
-
-            if (200 == responseEntity.getStatusCodeValue()) {
-                return responseEntity.getBody();
-            } else {
-                return "error with code : " + responseEntity.getStatusCodeValue();
-            }
+         return restTemplateService.RestTemplate();
         }
 
     //http://localhost:8080/RestTemplateDemo
@@ -74,5 +70,25 @@ public class RestTemplateController {
 
         return null;
     }
+    //http://localhost:8080/MockMvcTest
+    @GetMapping("/MockMvcTest")
+    public String MockMvcTest() {
+        return "MockMvcTest";
+    }
 
+    //http://localhost:8080/RestTemplateGroup
+    @GetMapping("/RestTemplateGroup/{userNo}")
+    public Group RestTemplateGroup(@PathVariable String userNo) {
+
+        System.out.println(userNo);
+        Group group =new Group();
+        List<User> users = new ArrayList<>();
+        User user =new User();
+        user.setId(1);
+        user.setUsername("sun");
+        user.setBirthday("19970920");
+        users.add(user);
+
+        return null;
+    }
 }

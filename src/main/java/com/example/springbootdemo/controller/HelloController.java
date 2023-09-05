@@ -37,25 +37,5 @@ public class HelloController {
     }
 
 
-    //http://localhost:8080/MockMvcTest
-    @GetMapping("/MockMvcTest")
-    public String MockMvcTest() {
-        return "MockMvcTest";
-    }
 
-    //http://localhost:8080/RestTemplateGroup
-    @GetMapping("/RestTemplateGroup/{userNo}")
-    public Group RestTemplateGroup(@PathVariable String userNo) {
-
-        System.out.println(userNo);
-        Group group =new Group();
-        List<User> users = new ArrayList<>();
-        User user =new User();
-        user.setId(1);
-        user.setUsername("sun");
-        user.setBirthday("19970920");
-        users.add(user);
-        group.setUserList(users);
-        return group;
-    }
 }

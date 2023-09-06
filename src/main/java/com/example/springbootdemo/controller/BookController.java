@@ -14,16 +14,14 @@ public class BookController {
     @Autowired
     BookMapper bookMapper;
     @GetMapping("/book")
-//http://localhost:8080/book
-
+    //http://localhost:8080/book
     public List book() {
         return bookMapper.getBook();
     }
 
 
     @GetMapping("/bookgroup")
-//http://localhost:8080/book
-
+    //http://localhost:8080/book
     public List bookgroup() {
         return bookMapper.getGroup();
     }

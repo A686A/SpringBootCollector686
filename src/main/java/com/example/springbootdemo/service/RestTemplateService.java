@@ -18,8 +18,8 @@ public class RestTemplateService {
     public String RestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
-        //httpHeaders.set("accseeToken","213");
-        HttpEntity httpEntity = new HttpEntity<>(httpHeaders);
+        //httpHeaders.set("accessToken","213");
+        HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(httpHeaders);
         String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id=" + appId + "&app_secret=" + appSecret;
         ResponseEntity<String> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET, httpEntity, String.class);
 

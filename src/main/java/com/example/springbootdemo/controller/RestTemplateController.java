@@ -1,7 +1,6 @@
 package com.example.springbootdemo.controller;
 
 import com.example.springbootdemo.entity.User;
-import com.example.springbootdemo.handler.CustomErrorHandler;
 import com.example.springbootdemo.entity.Group;
 
 import com.example.springbootdemo.service.RestTemplateService;
@@ -41,7 +40,7 @@ public class RestTemplateController {
         HttpEntity httpEntity =new HttpEntity<>(httpHeaders);
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setErrorHandler(new CustomErrorHandler());
+
         String userNO ="2";
 
             String url=urltest+userNO;

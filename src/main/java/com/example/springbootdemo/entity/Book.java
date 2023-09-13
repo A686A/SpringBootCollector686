@@ -8,4 +8,5 @@ public class Book {
     String id;
     String name;
     String master;
+    Author author;
 }

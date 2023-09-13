@@ -18,14 +18,12 @@ public class RestTemplateService {
     public String RestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
-        //httpHeaders.set("accessToken","213");
         HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(httpHeaders);
         String apiURL = "https://www.mxnzp.com/api/weather/current/深圳市?app_id=" + appId + "&app_secret=" + appSecret;
         ResponseEntity<String> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET, httpEntity, String.class);
 
         if (200 == responseEntity.getStatusCodeValue()) {
-            return "success";
-            //responseEntity.getBody();
+            return responseEntity.getBody();
         } else {
             return "error with code : " + responseEntity.getStatusCodeValue();
         }

@@ -16,6 +16,9 @@
     <result column='id' property='id' />
     <result column='name' property='name' />
     <result column='master' property='master' />
+        <association property="author" javaType="com.example.springbootdemo.entity.Author">
+            <result column="author" property="authorName"/>
+        </association>
     </resultMap>
     <select id="getGroup"  resultMap="GroupList">
         SELECT

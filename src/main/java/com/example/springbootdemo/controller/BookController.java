@@ -21,7 +21,7 @@ public class BookController {
 
 
     @GetMapping("/bookgroup")
-    //http://localhost:8080/book
+    //http://localhost:8080/bookgroup
     public List bookgroup() {
         return bookMapper.getGroup();
     }

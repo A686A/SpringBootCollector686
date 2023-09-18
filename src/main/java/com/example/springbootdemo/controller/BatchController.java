@@ -36,20 +36,20 @@ public class BatchController {
             }
         };
     }
-    //作业步骤-不带读/写/处理
-    @Bean
-    public Step step1(){
-        return stepBuilderFactory.get("step1")
-                .tasklet(tasklet())
-                .build();
-    }
-    //定义作业
-    @Bean
-    public Job job(){
-        return jobBuilderFactory.get("hello-job")
-                .start(step1())
-                .build();
-    }
+//    //作业步骤-不带读/写/处理
+//    @Bean
+//    public Step step1(){
+//        return stepBuilderFactory.get("step1")
+//                .tasklet(tasklet())
+//                .build();
+//    }
+//    //定义作业
+//    @Bean
+//    public Job job(){
+//        return jobBuilderFactory.get("hello-job")
+//                .start(step1())
+//                .build();
+//    }
 
 
 }

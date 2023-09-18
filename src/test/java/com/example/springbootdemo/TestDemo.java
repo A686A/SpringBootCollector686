@@ -59,14 +59,4 @@ public class TestDemo {
                 .andReturn();
         restTemplateServiceImpl.RestTemplate();
     }
-
-    @Test
-    public void Test() throws Exception {
-
-
-        Assertions.assertEquals("success",restTemplateController.restTemplateTest().toString());
-    }
-
-
-
 }

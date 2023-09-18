@@ -25,6 +25,7 @@ public class UserController {
     @Autowired
     private OrderMapper orderMapper;
 
+    //http://localhost:8080/user
     @GetMapping("/user")
     public List<User> query(){
         List<User> userList = usermapper.find();

@@ -1,26 +1,22 @@
 package com.example.springbootdemo.controller;
 
-import com.example.springbootdemo.service.Impl.RestTemplateServiceImpl;
+import com.example.springbootdemo.entity.User;
+import com.example.springbootdemo.service.RestTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
 @RestController
 public class RestTemplateController {
-    @Value("${url.testtemplateurl}")
-    String urltest;
     @Autowired
-    RestTemplateServiceImpl restTemplateServiceImpl;
+    RestTemplateService restTemplateService;
 
+    //http://localhost:8080/RestTemplateList
+    @GetMapping("/RestTemplateList")
+    public List<User> restTemplateList(){
 
-    //http://localhost:8080/RestTemplateTest
-    @GetMapping("/RestTemplateTest")
-    public String restTemplateTest(){
-         return restTemplateServiceImpl.RestTemplate();
-        }
-
-
-
+        return restTemplateService.restTemplateList();
+    }
 }

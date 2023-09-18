@@ -1,19 +1,15 @@
 package com.example.springbootdemo;
 
 import com.example.springbootdemo.controller.RestTemplateController;
-import com.example.springbootdemo.service.RestTemplateService;
+import com.example.springbootdemo.service.Impl.RestTemplateServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -37,7 +33,7 @@ public class TestDemo {
     @Autowired
     RestTemplateController restTemplateController;
     @MockBean
-    RestTemplateService restTemplateService;
+    RestTemplateServiceImpl restTemplateServiceImpl;
 
   @Before
     public void init() {
@@ -57,11 +53,11 @@ public class TestDemo {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/RestTemplateTest")
                         .header("accessToken","686").param("cifNO","668"))
                 .andExpect(MockMvcResultMatchers.content().string("success"))
-                .andExpect(MockMvcResultMatchers.forwardedUrlTemplate(restTemplateService.RestTemplate()))
+                .andExpect(MockMvcResultMatchers.forwardedUrlTemplate(restTemplateServiceImpl.RestTemplate()))
                 //.andExpect(MockMvcResultMatchers.jsonPath("accesstoken").value("688"))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
-        restTemplateService.RestTemplate();
+        restTemplateServiceImpl.RestTemplate();
     }
 
     @Test

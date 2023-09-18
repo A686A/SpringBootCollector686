@@ -8,19 +8,20 @@
     </select>
 
 
-    <resultMap id="GroupList" type="com.example.springbootdemo.entity.Group">
-    <result column='group_name' property='groupName' />
-    <collection property='bookList'  resultMap='bookList'/>
-    </resultMap>
-    <resultMap id="bookList" type="com.example.springbootdemo.entity.Book">
-    <result column='id' property='id' />
-    <result column='name' property='name' />
-    <result column='master' property='master' />
-        <association property="author" javaType="com.example.springbootdemo.entity.Author">
-            <result column="author" property="authorName"/>
-        </association>
-    </resultMap>
-    <select id="getGroup"  resultMap="GroupList">
+<!--    <resultMap id="GroupList" type="com.example.springbootdemo.entity.Group">-->
+<!--    <result column='group_name' property='groupName' />-->
+<!--    <collection property='bookList'  resultMap='bookList'/>-->
+<!--    </resultMap>-->
+<!--    <resultMap id="bookList" type="com.example.springbootdemo.entity.Book">-->
+<!--    <result column='id' property='id' />-->
+<!--    <result column='name' property='name' />-->
+<!--    <result column='master' property='master' />-->
+<!--        <association property="author" javaType="com.example.springbootdemo.entity.Author">-->
+<!--            <result column="author" property="authorName"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+<!--    <select id="getGroup"  resultMap="GroupList">-->
+    <select id="getGroup"  resultType="com.example.springbootdemo.entity.groupVo">
         SELECT
            group.group_name,book.*
         FROM

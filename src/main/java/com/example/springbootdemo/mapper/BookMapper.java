@@ -2,6 +2,7 @@ package com.example.springbootdemo.mapper;
 
 import com.example.springbootdemo.entity.Book;
 import com.example.springbootdemo.entity.Group;
+import com.example.springbootdemo.entity.groupVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -10,5 +11,5 @@ import java.util.List;
 public interface BookMapper {
     List<Book> getBook();
 
-    List<Group> getGroup();
+    List<groupVo> getGroup();
 }

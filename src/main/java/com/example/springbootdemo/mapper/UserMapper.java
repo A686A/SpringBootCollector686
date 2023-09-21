@@ -11,10 +11,10 @@ import java.util.List;
 @Mapper
 public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user")
-    public List<User> find();
+    List<User> find();
 
     @Insert("insert into user value (#{id},#{username},#{password},#{birthday})")
-    public int insert(User user);
+    int insert(User user);
 
     //   查询用户，根据用户id查询信息   select * from user where id =
     @Select("select * from user where id = #{id}")
@@ -25,12 +25,12 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user")
     @Results(
             {
-                    @Result(column = "id",property = "id"),
-                    @Result(column = "username",property = "username"),
-                    @Result(column = "password",property = "password"),
-                    @Result(column = "birthday",property = "birthday"),
-                    @Result(column = "id",property = "orders",javaType = List.class,
-                            many=@Many(select = "com.example.springbootdemo.mapper.OrderMapper.selectByUid")
+                    @Result(column = "id", property = "id"),
+                    @Result(column = "username", property = "username"),
+                    @Result(column = "password", property = "password"),
+                    @Result(column = "birthday", property = "birthday"),
+                    @Result(column = "id", property = "orders", javaType = List.class,
+                            many = @Many(select = "com.example.springbootdemo.mapper.OrderMapper.selectByUid")
                     )
             }
     )

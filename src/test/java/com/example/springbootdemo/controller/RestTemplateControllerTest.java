@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -23,8 +24,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class RestTemplateControllerTest {
-    @Resource
-    private MockMvc mockMvc;
+//    @Autowired
+//    private MockMvc mockMvc;
 
     @Mock
     private RestTemplate restTemplate;
@@ -42,5 +43,6 @@ class RestTemplateControllerTest {
         ResponseEntity<List<User>> responseEntity = new ResponseEntity<List<User>>(userList,HttpStatus.OK);
         Mockito.when(restTemplate.exchange(apiURL, HttpMethod.GET, null, responseBodyType))
                 .thenReturn(Mockito.any());
+
     }
 }

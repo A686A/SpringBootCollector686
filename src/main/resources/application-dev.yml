@@ -2,7 +2,7 @@ server:
   port: 8080
 
 spring:
-    # 初始化数据库，文件在依赖jar包中
+    # spring batch   initial database，file in jar
   sql:
     init:
       schema-locations: classpath:org/springframework/batch/core/schema-mysql.sql

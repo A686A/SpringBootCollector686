@@ -13,10 +13,17 @@ public class RestTemplateController {
     @Autowired
     RestTemplateService restTemplateService;
 
-    //http://localhost:8080/RestTemplateList
-    @GetMapping("/RestTemplateList")
-    public List<User> restTemplateList(){
+    //http://localhost:8080/ListRestTemplate
+    @GetMapping("/ListRestTemplate")
+    public List<User> ListRestTemplate() {
 
-        return restTemplateService.restTemplateList();
+        return restTemplateService.listRestTemplate();
+    }
+
+    //http://localhost:8080/ListRestTemplate
+    @GetMapping("/PostTemplateList")
+    public List<User> PostTemplateList() {
+
+        return restTemplateService.listRestTemplate();
     }
 }

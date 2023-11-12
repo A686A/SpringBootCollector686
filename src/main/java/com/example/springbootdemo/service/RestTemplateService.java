@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface RestTemplateService {
 
-    List<User> restTemplateList();
+    List<User> listRestTemplate();
+
+
 }

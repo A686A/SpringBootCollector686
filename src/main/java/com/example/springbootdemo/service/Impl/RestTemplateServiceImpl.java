@@ -20,7 +20,7 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     @Value("${Acount.APP_SECRET}")
     String appSecret;
 
-    public String RestTemplate() {
+    public String getRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders httpHeaders = new HttpHeaders();
         HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(httpHeaders);
@@ -35,10 +35,21 @@ public class RestTemplateServiceImpl implements RestTemplateService {
     }
 
     //RestTemplate返回值为List<User>
-    public List<User> restTemplateList(){
+    public List<User> listRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
-        String apiURL="http://localhost:8080/user";
-        ParameterizedTypeReference<List<User>> responseBodyType = new ParameterizedTypeReference<List<User>>() {};
+        String apiURL = "http://localhost:8080/user";
+        ParameterizedTypeReference<List<User>> responseBodyType = new ParameterizedTypeReference<List<User>>() {
+        };
+        ResponseEntity<List<User>> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET, null, responseBodyType);
+        return responseEntity.getBody();
+    }
+
+    //RestTemplate返回值为List<User>
+    public List<User> postRestTemplate() {
+        RestTemplate restTemplate = new RestTemplate();
+        String apiURL = "http://localhost:8080/user";
+        ParameterizedTypeReference<List<User>> responseBodyType = new ParameterizedTypeReference<List<User>>() {
+        };
         ResponseEntity<List<User>> responseEntity = restTemplate.exchange(apiURL, HttpMethod.GET, null, responseBodyType);
         return responseEntity.getBody();
     }

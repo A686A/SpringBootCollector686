@@ -1,17 +1,16 @@
 package com.example.springbootdemo.controller;
 
-import org.springframework.batch.core.Job;
-import org.springframework.batch.core.Step;
-import org.springframework.batch.core.StepContribution;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import com.example.springbootdemo.service.BatchService;
+import org.springframework.batch.core.*;
+import org.springframework.batch.core.explore.JobExplorer;
 import org.springframework.batch.core.launch.JobLauncher;
-import org.springframework.batch.core.scope.context.ChunkContext;
-import org.springframework.batch.core.step.tasklet.Tasklet;
-import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
+import java.util.Date;
 
 @RestController
 public class BatchController {
@@ -19,39 +18,51 @@ public class BatchController {
     //job调度器
     @Autowired
     private JobLauncher jobLauncher;
-    //job构造器工厂
+
     @Autowired
-    private JobBuilderFactory jobBuilderFactory;
-    //step构造器工厂
+    private JobExplorer jobExplorer;
+
     @Autowired
-    private StepBuilderFactory stepBuilderFactory;
-    //任务-step执行逻辑由tasklet完成
-    @Bean
-    public Tasklet tasklet(){
-        return new Tasklet() {
-            @Override
-            public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-                System.out.println("Hello SpringBatch....");
-                return RepeatStatus.FINISHED;
-            }
-        };
+    @Qualifier("csvToDBJob")
+    private Job csvToDBJob;
+
+    @Autowired
+    @Qualifier("dbToDBJob")  //将spring容器中名为： csvToDBJob job对象注入当前变量中
+    private Job dbToDBJob;
+
+    @Autowired
+    BatchService batchService;
+
+    //http://localhost:8080/dataInit
+    @GetMapping("/dataInit")
+    public String dataInit() throws IOException {
+        batchService.dataInit();
+        return "ok";
     }
-//    //作业步骤-不带读/写/处理
-//    @Bean
-//    public Step step1(){
-//        return stepBuilderFactory.get("step1")
-//                .tasklet(tasklet())
-//                .build();
-//    }
-//    //定义作业
-//    @Bean
-//    public Job job(){
-//        return jobBuilderFactory.get("hello-job")
-//                .start(step1())
-//                .build();
-//    }
 
+    //http://localhost:8080/csvToDB
+    @GetMapping("/csvToDB")
+    public String csvToDB() throws Exception {
+        batchService.truncateTemp(); //清空数据运行多次执行
 
+        //需要多次执行，run.id 必须重写之前，再重构一个新的参数对象
+        JobParameters jobParameters = new JobParametersBuilder(new JobParameters(),jobExplorer)
+                .addLong("time", new Date().getTime())
+                .getNextJobParameters(csvToDBJob).toJobParameters();
+        JobExecution run = jobLauncher.run(csvToDBJob, jobParameters);
+        return run.getId().toString();
+    }
+
+    //http://localhost:8080/dbToDB
+    @GetMapping("/dbToDB")
+    public String dbToDB() throws Exception {
+        batchService.truncateAll();
+        JobParameters jobParameters = new JobParametersBuilder(new JobParameters(),jobExplorer)
+                .addLong("time", new Date().getTime())
+                .getNextJobParameters(dbToDBJob).toJobParameters();
+        JobExecution run = jobLauncher.run(dbToDBJob, jobParameters);
+        return run.getId().toString();
+    }
 }
 
 

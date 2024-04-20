@@ -8,5 +8,4 @@ public interface RestTemplateService {
 
     List<User> listRestTemplate();
 
-
 }

@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DBToDBPartitioner implements Partitioner {
+
+
     //约定分50个区， 每个区10000个数据
     @Override
     public Map<String, ExecutionContext> partition(int gridSize) {

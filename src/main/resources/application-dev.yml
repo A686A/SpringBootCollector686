@@ -1,8 +1,11 @@
 server:
   port: 8080
+  # thymeleaf  request path
+#  servlet:
+#    context-path: /security
 
 spring:
-    # spring batch   initial database，file in jar
+  # spring batch   initial database，file in jar
   sql:
     init:
       schema-locations: classpath:org/springframework/batch/core/schema-mysql.sql

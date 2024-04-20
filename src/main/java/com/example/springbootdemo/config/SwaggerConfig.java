@@ -33,7 +33,7 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("演示项目API") // 标题
                 .description("演示项目") // 描述
-                .version("1.0") // 版本
+                .version("2.0") // 版本
                 .build();
     }
 }

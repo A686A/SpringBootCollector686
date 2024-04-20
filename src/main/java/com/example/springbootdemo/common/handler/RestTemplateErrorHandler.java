@@ -1,4 +1,4 @@
-package com.example.springbootdemo.handler;
+package com.example.springbootdemo.common.handler;
 
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.client.ClientHttpResponse;

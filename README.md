@@ -1,12 +1,13 @@
 # SpringBootDemo
-Controller
-RestTemplateController
 
+Controller RestTemplateController
 
-application.propreties
-spring.profiles.active=prod  配置切换文件dev/prod
+application.propreties spring.profiles.active=prod 配置切换文件dev/prod
 
-application.yml   .igitgnore
+application.yml .igitgnore
 
-application-dev.yml
-application-prod.yml
+application-dev.yml application-prod.yml
+
+###### 跨域设置
+
+@CrossOrigin

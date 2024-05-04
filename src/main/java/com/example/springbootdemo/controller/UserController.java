@@ -1,18 +1,16 @@
 package com.example.springbootdemo.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springbootdemo.common.model.Result;
 import com.example.springbootdemo.entity.User;
-import com.example.springbootdemo.mapper.OrderMapper;
 import com.example.springbootdemo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -21,21 +19,16 @@ public class UserController {
     @Autowired
     private UserMapper usermapper;
 
-    @Autowired
-    private OrderMapper orderMapper;
-
     //http://localhost:8080/user
     @GetMapping("/user")
     public List<User> query() {
-        List<User> userList = usermapper.find();
-        return userList;
+        return usermapper.find();
     }
 
     //使用继承的basemapper的方法
     @GetMapping("/user2")
     public List<User> query2() {
-        List<User> userList = usermapper.selectList(null);
-        return userList;
+        return usermapper.selectList(null);
     }
 
     //使用继承的basemapper的方法
@@ -56,19 +49,69 @@ public class UserController {
         return usermapper.selectList(queryWrapper);
     }
 
-    //  分页查询
-//    List<Employee> result = employeeMapper.selectPage(new Page<>(1, 2),ew.between("id",1,20).eq("gender","F"));
+    //分页查询
+    //List<Employee> result = employeeMapper.selectPage(new Page<>(1, 2),ew.between("id",1,20).eq("gender","F"));
+    //http://localhost:8080/user/findByPage
     @GetMapping("/user/findByPage")
-    public IPage findByPage() {
+    public Result<IPage> findByPage(@RequestParam(defaultValue = "1") Integer current,
+                                    @RequestParam(defaultValue = "10") Integer size) {
         //设置起始值及每页条数
-        Page<User> page = new Page<>(0, 2);
+        Page<User> page = new Page<>(current, size);
         IPage iPage = usermapper.selectPage(page, null);
-        return iPage;
+        return Result.success(iPage);
     }
 
-    @PostMapping("/insertUser")
-    public int insertUser(User user) {
+
+    //http://localhost:8080/user/findByName
+    @GetMapping("/user/findByName")
+    public Result<IPage> findByName(String username) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("username", username).orderByDesc("birthday");
+        //设置起始值及每页条数
+        Page<User> page = new Page<>(1, 15);
+        IPage iPage = usermapper.selectPage(page, queryWrapper);
+        return Result.success(iPage);
+    }
+
+    //
+    //http://localhost:8080/userAdd
+    @PostMapping("/userAdd")
+    public Result<String> insertUser(@RequestBody User user) {
+        System.out.println(user.getGender());
+        String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        user.setBirthday(now);
+        user.setPassword("6866");
         usermapper.insert(user);
+        return Result.success("insert user success");
+    }
+
+    //
+    //http://localhost:8080/addUserList
+    @PostMapping("/addUserList")
+    public Result<String> addUserList(@RequestBody List<User> users) {
+        for (User user : users) {
+            System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuserid" + user.getId());
+            String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            user.setBirthday(now);
+            user.setPassword("6866");
+            usermapper.insert(user);
+        }
+        return Result.success("insert user success");
+    }
+
+    //单个删除用户
+    //http://localhost:8080/user/{id}
+    @DeleteMapping("/user/{id}")
+    public int deleteUser(@PathVariable("id") long id) {
+        usermapper.deleteById(id);
         return 1;
+    }
+
+    //批量删除用户
+    //http://localhost:8080/user/deleteUserList
+    @DeleteMapping("/user/deleteUserList")
+    public Result<String> deleteUserList(@RequestBody List<Long> id) {
+        usermapper.deleteBatchIds(id);
+        return Result.success("delete user list success");
     }
 }

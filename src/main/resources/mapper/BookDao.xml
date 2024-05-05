@@ -3,29 +3,32 @@
 
 <mapper namespace="com.example.springbootdemo.mapper.BookMapper">
 
-    <select id="getBook"  resultType="com.example.springbootdemo.entity.Book">
-        SELECT * FROM book
+    <select id="getBook" resultType="com.example.springbootdemo.entity.Book">
+        SELECT *
+        FROM book
     </select>
 
 
-<!--    <resultMap id="GroupList" type="com.example.springbootdemo.entity.Group">-->
-<!--    <result column='group_name' property='groupName' />-->
-<!--    <collection property='bookList'  resultMap='bookList'/>-->
-<!--    </resultMap>-->
-<!--    <resultMap id="bookList" type="com.example.springbootdemo.entity.Book">-->
-<!--    <result column='id' property='id' />-->
-<!--    <result column='name' property='name' />-->
-<!--    <result column='master' property='master' />-->
-<!--        <association property="author" javaType="com.example.springbootdemo.entity.Author">-->
-<!--            <result column="author" property="authorName"/>-->
-<!--        </association>-->
-<!--    </resultMap>-->
-<!--    <select id="getGroup"  resultMap="GroupList">-->
-    <select id="getGroup"  resultType="com.example.springbootdemo.entity.groupVo">
-        SELECT
-           group.group_name,book.*
+    <!--    <resultMap id="GroupList" type="com.example.springbootdemo.entity.Group">-->
+    <!--    <result column='group_name' property='groupName' />-->
+    <!--    <collection property='bookList'  resultMap='bookList'/>-->
+    <!--    </resultMap>-->
+    <!--    <resultMap id="bookList" type="com.example.springbootdemo.entity.Book">-->
+    <!--    <result column='id' property='id' />-->
+    <!--    <result column='name' property='name' />-->
+    <!--    <result column='master' property='master' />-->
+    <!--        <association property="author" javaType="com.example.springbootdemo.entity.Author">-->
+    <!--            <result column="author" property="authorName"/>-->
+    <!--        </association>-->
+    <!--    </resultMap>-->
+    <!--    <select id="getGroup"  resultMap="GroupList">-->
+    <select id="getGroup" resultType="com.example.springbootdemo.entity.groupVo">
+        SELECT group.group_name,
+               book.* where
         FROM
             `group`
-                LEFT JOIN  book  ON group.id = book.master
+            LEFT JOIN book
+        ON
+        group.id = book.master
     </select>
 </mapper>

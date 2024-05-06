@@ -25,6 +25,9 @@ trim()
 
 ## ListController
 
+<br>Mybatis嵌套查询结果集中包含简单数据类型集合或者多个List<T>的处理
+<br>entity
+
 ### Stream
 
 #### 生成流的方式五种

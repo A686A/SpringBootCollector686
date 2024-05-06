@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class Group {
-    String groupName;
-    List<Book> bookList;
+    private int id;
+    private String groupName;
+    private List<Team> teamList;
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springbootdemo.mapper.ListMapper">
+
+    <resultMap id="GroupList" type="com.example.springbootdemo.entity.Group">
+        <result column='id' property='id'/>
+        <result column='group_name' property='groupName'/>
+        <collection property='teamList' resultMap='teamList'/>
+    </resultMap>
+    <resultMap id="teamList" type="com.example.springbootdemo.entity.Team">
+        <result column='team_id' property='teamId'/>
+        <result column='group_id' property='groupId'/>
+        <result column='team_name' property='teamName'/>
+        <collection property='memberList' resultMap='memberList'/>
+        <!--        属性为entity时-->
+        <!--        <association property="author" javaType="com.example.springbootdemo.entity.Author">-->
+        <!--            <result column="author" property="authorName"/>-->
+        <!--        </association>-->
+    </resultMap>
+    <resultMap id="memberList" type="com.example.springbootdemo.entity.Member">
+        <result column='member_id' property='memberId'/>
+        <result column='team_id' property='teamId'/>
+        <result column='member_name' property='memberName'/>
+        <result column='position' property='position'/>
+    </resultMap>
+    <select id="getGroupInfo" resultMap="GroupList">
+        SELECT g.id,
+               g.group_name,
+               t.team_id,
+               t.group_id,
+               t.team_name,
+               m.member_id,
+               m.member_name,
+               m.position
+
+        FROM `group` g
+                 LEFT JOIN team t
+                           ON g.id = t.group_id
+                 LEFT JOIN member m
+                           ON t.team_id = m.team_id
+    </select>
+</mapper>

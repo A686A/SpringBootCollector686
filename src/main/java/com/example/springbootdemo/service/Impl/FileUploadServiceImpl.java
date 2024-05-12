@@ -7,6 +7,5 @@ import org.springframework.stereotype.Service;
 public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public void fileOutput() {
-
     }
 }

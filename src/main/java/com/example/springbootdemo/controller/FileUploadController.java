@@ -12,7 +12,7 @@ import java.io.IOException;
 @RestController
 public class FileUploadController {
 
-    //http://localhost:8080/upload    在postman-body中修改上传content-type类型为multipart/form-data（选择form）
+    //http://localhost:8080/upload    在postman-body中修改上传content-type类型为multipart/form-data（选择form）key列选择file
     @ApiOperation("文件上传")
     @PostMapping("/upload")
     public String upFile(String nickname, MultipartFile photo, HttpServletRequest request) throws IOException {

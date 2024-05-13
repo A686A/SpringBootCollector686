@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.UUID;
+
 @RestController
 public class MinioController {
     @Autowired
@@ -19,6 +21,7 @@ public class MinioController {
     //http://localhost:8080/get
     @GetMapping("/get")
     public String getUrl() {
+        String uuid = UUID.randomUUID().toString();
         return minioUtil.createUploadUrl("", "");
     }
 

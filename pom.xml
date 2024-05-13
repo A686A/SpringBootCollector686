@@ -17,16 +17,58 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
+        <!--        !for mockito-->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>4.8.1</scope>
+        </dependency>
+        <!--        !for mockito-->
+
+        <!--        !for rider-->
+        <dependency>
+            <groupId>com.github.database-rider</groupId>
+            <artifactId>rider-junit5</artifactId>
+            <version>1.41.0</version>
+            <scope>test</scope>
+        </dependency>
+        <!--        !for rider-->
+
+        <!--        !for model mapper-->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <!--        !for model mapper-->
+
+        <!--        !for openapi-->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.14</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator-maven-plugin</artifactId>
+            <version>6.5.0</version>
+        </dependency>
+        <!--        !for openapi-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <!--        !for minio-->
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
             <version>4.9.0</version>
         </dependency>
-
         <dependency>
             <groupId>io.minio</groupId>
             <artifactId>minio</artifactId>
@@ -38,6 +80,8 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--        !for minio-->
+
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.boot</groupId>-->
         <!--            <artifactId>spring-boot-starter-security</artifactId>-->

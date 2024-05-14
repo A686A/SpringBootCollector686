@@ -1,7 +1,6 @@
 package com.example.springbootdemo.controller;
 
 import com.example.springbootdemo.entity.User;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -24,7 +23,7 @@ class RestTemplateControllerTest {
     @Mock
     private RestTemplate restTemplate;
 
-    @Before
+    
     public void setup() {
         MockitoAnnotations.initMocks(this);
     }

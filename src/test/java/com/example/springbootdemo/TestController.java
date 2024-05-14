@@ -2,13 +2,16 @@ package com.example.springbootdemo;
 
 import com.example.springbootdemo.controller.RestTemplateController;
 import com.example.springbootdemo.service.Impl.RestTemplateServiceImpl;
-import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import com.github.database.rider.junit5.api.DBRider;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -22,9 +25,14 @@ import javax.annotation.Resource;
 //23.8.22
 //随机端口启动
 //@RunWith(SpringRunner.class)
+@DisplayName("test controller")
+@TestMethodOrder(MethodOrderer.MethodName.class)
+@ExtendWith(OutputCaptureExtension.class)
+@DBRider
 @SpringBootTest()
 @AutoConfigureMockMvc
-public class TestDemo {
+
+public class TestController {
     @Autowired
     RestTemplateController restTemplateController;
     @MockBean
@@ -35,7 +43,9 @@ public class TestDemo {
     @Resource
     private MockMvc mockMvc;
 
-    @Before
+    private Logger logger;
+
+    @BeforeEach
     public void init() {
         mockServer = MockRestServiceServer.createServer(restTemplate);
     }

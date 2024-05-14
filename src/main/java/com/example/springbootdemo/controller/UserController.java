@@ -3,6 +3,9 @@ package com.example.springbootdemo.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springbootdemo.common.constant.MessageId;
+import com.example.springbootdemo.common.log.SLogger;
+import com.example.springbootdemo.common.log.SLoggerFactory;
 import com.example.springbootdemo.common.model.Result;
 import com.example.springbootdemo.entity.User;
 import com.example.springbootdemo.mapper.UserMapper;
@@ -16,12 +19,15 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class UserController {
+    private static final SLogger LOGGER = SLoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserMapper usermapper;
 
     //http://localhost:8080/user
     @GetMapping("/user")
     public List<User> query() {
+        LOGGER.info(MessageId.MESSAGE_ID_4000001.getLogMessageId(), "error");
         return usermapper.find();
     }
 

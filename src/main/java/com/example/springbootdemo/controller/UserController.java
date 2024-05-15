@@ -3,6 +3,7 @@ package com.example.springbootdemo.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.springbootdemo.common.constant.CodeConst;
 import com.example.springbootdemo.common.constant.MessageId;
 import com.example.springbootdemo.common.log.SLogger;
 import com.example.springbootdemo.common.log.SLoggerFactory;
@@ -24,9 +25,10 @@ public class UserController {
     @Autowired
     private UserMapper usermapper;
 
-    //http://localhost:8080/user
+    //http://localhost:8080/userhttp://localhost:8080/user
     @GetMapping("/user")
     public List<User> query() {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + CodeConst.USER_ROLE);
         LOGGER.info(MessageId.MESSAGE_ID_4000001.getLogMessageId(), "error");
         return usermapper.find();
     }

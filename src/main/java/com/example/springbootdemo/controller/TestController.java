@@ -41,4 +41,10 @@ public class TestController {
 
         test.tan();
     }
+
+    @GetMapping("/testException")
+    public void TestException() {
+
+        test.tan();
+    }
 }

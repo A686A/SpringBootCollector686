@@ -15,3 +15,13 @@ spring:
 job:
   data:
     path: D:/demo
+
+minio:
+  endpoint: http://xxx.xx.xxx.xx:9000 #Minio服务所在地址
+  bucketName: xxxxx #存储桶名称
+  accessKey: xxxxxxx #访问的key
+  secretKey: xxxxxxx #访问的秘钥
+
+Acount:
+  APP_ID: xxx
+  APP_SECRET: xxx

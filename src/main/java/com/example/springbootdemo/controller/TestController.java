@@ -3,6 +3,7 @@ package com.example.springbootdemo.controller;
 import com.example.springbootdemo.entity.Book;
 import com.example.springbootdemo.service.Impl.TestImpl;
 import com.example.springbootdemo.service.TestService;
+import io.swagger.v3.oas.annotations.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +44,7 @@ public class TestController {
     }
 
     @GetMapping("/testException")
-    public void TestException() {
+    public void TestException( String a) {
 
         test.tan();
     }

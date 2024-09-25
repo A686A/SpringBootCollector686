@@ -139,7 +139,7 @@
             <artifactId>httpclient</artifactId>
             <version>4.5.7</version>
         </dependency>
-        <!-- 添加swagger-ui相关功能 -->
+        <!-- 添加csv相关功能 -->
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
@@ -168,10 +168,12 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!-- openapi相关功能 -->
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.5.0</version> <!-- 确保使用最新的稳定版本 -->
+                <version>6.5.0</version>
                 <executions>
                     <execution>
                         <id>1</id>
@@ -179,16 +181,25 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <groupId>collector.backend</groupId>
+                            <artifactId>backend</artifactId>
                             <inputSpec>${project.basedir}/src/main/resources/api.yaml</inputSpec>
                             <generatorName>spring</generatorName>
-                            <output>${project.build.directory}/generated-sources/openapi</output>
-                            <apiPackage>com.example.demo.api</apiPackage>
-                            <modelPackage>com.example.demo.model</modelPackage>
+                            <generateApis>true</generateApis>
+                            <templateDirectory>${project.basedir}/src/main/resources/openapi/template</templateDirectory>
+<!--                            <output>${project.build.directory}/generated-sources/openapi/src/main/java</output>-->
                             <configOptions>
+                                <sourceFolder>src/main/java</sourceFolder>
+                                <basePackage>collector.bu</basePackage>
+                                <apiPackage>collector.bu.controller.api</apiPackage>
+                                <modelPackage>collector.bu.controller.model</modelPackage>
                                 <interfaceOnly>true</interfaceOnly>
+                                <useTags>true</useTags>
+                                <openaApiNullable>false</openaApiNullable>
                             </configOptions>
                         </configuration>
                     </execution>
+
                 </executions>
             </plugin>
         </plugins>

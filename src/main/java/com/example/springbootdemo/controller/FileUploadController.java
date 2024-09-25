@@ -1,6 +1,7 @@
 package com.example.springbootdemo.controller;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.util.FileSystemUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,6 +45,13 @@ public class FileUploadController {
 
     public void csvOutput() {
 
+    }
+    public void delete() {
+        String path = "D:/testdemo";
+//     File file = new File(path);
+//     file.delete();
 
+        // 删除指定文件夹
+        FileSystemUtils.deleteRecursively(new File(path));
     }
 }

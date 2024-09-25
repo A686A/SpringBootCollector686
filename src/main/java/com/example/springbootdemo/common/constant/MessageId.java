@@ -6,7 +6,7 @@ import org.springframework.web.client.HttpServerErrorException;
 
 @Getter
 public enum MessageId {
-    MESSAGE_ID_4000001("4000001", "error.001", "0");
+    MESSAGE_ID_4000001("4000001", "info.001", "0");
 
     private final String responseMessageId;
     private final String logMessageId;

@@ -4,7 +4,6 @@ import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import com.example.springbootdemo.controller.RestTemplateController;
-import com.example.springbootdemo.controller.TestController;
 import com.example.springbootdemo.service.Impl.RestTemplateServiceImpl;
 import com.github.database.rider.core.api.dataset.DataSet;
 import com.github.database.rider.junit5.api.DBRider;
@@ -25,11 +24,8 @@ import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +49,7 @@ public class JunitTestController {
     private MockRestServiceServer mockServer;
     @Mock
     private RestTemplate restTemplate;
-    @Resource
+    //@Resource
     private MockMvc mockMvc;
 
     @BeforeEach

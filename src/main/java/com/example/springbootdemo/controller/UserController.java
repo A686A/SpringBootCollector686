@@ -11,10 +11,11 @@ import com.example.springbootdemo.common.model.Result;
 import com.example.springbootdemo.entity.User;
 import com.example.springbootdemo.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -80,32 +81,61 @@ public class UserController {
         IPage iPage = usermapper.selectPage(page, queryWrapper);
         return Result.success(iPage);
     }
+    
+    //http://localhost:8080/userAdd
+    @PostMapping("/userAdd")
+    public Result<String> addUser(@RequestBody List<User> users) {
+        LOGGER.info(MessageId.MESSAGE_ID_4000001.getLogMessageId(), "addUser start");
+        try {
+            if (users == null || users.isEmpty()) {
+                return Result.error("400", "user list cannot be empty");
+            }
+
+            String now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+            for (User user : users) {
+                if (user == null || !StringUtils.hasText(user.getUsername()) || !StringUtils.hasText(user.getEmail())) {
+                    return Result.error("400", "username and email cannot be empty");
+                }
+                if (!StringUtils.hasText(user.getCreatedAt())) {
+                    user.setCreatedAt(now);
+                }
+                usermapper.insert(user);
+            }
+            return Result.success("insert user success, count: " + users.size());
+        } catch (Exception e) {
+            LOGGER.info(MessageId.MESSAGE_ID_4000001.getLogMessageId(), e, "addUser error");
+            return Result.error("500", "insert user failed: " + e.getMessage());
+        } finally {
+            int size = users == null ? 0 : users.size();
+            LOGGER.info(MessageId.MESSAGE_ID_4000001.getLogMessageId(), "addUser end, count: " + size);
+        }
+    }
 
     //
     //http://localhost:8080/userAdd
-    @PostMapping("/userAdd")
-    public Result<String> insertUser(@RequestBody User user) {
-        System.out.println(user.getGender());
-        String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        user.setBirthday(now);
-        user.setPassword("6866");
-        usermapper.insert(user);
-        return Result.success("insert user success");
-    }
+//    @PostMapping("/userAdd")
+//    public Result<String> insertUser(@RequestBody User user) {
+//        System.out.println(user.getGender());
+//        String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//        user.setBirthday(now);
+//        user.setPassword("6866");
+//        usermapper.insert(user);
+//        return Result.success("insert user success");
+//    }
 
     //
     //http://localhost:8080/addUserList
-    @PostMapping("/addUserList")
-    public Result<String> addUserList(@RequestBody List<User> users) {
-        for (User user : users) {
-            System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuserid" + user.getId());
-            String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            user.setBirthday(now);
-            user.setPassword("6866");
-            usermapper.insert(user);
-        }
-        return Result.success("insert user success");
-    }
+//    @PostMapping("/addUserList")
+//    public Result<String> addUserList(@RequestBody List<User> users) {
+//        for (User user : users) {
+//            System.out.println("uuuuuuuuuuuuuuuuuuuuuuuuserid" + user.getId());
+//            String now = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//            user.setBirthday(now);
+//            user.setPassword("6866");
+//            usermapper.insert(user);
+//        }
+//        return Result.success("insert user success");
+//    }
 
     //单个删除用户
     //http://localhost:8080/user/{id}

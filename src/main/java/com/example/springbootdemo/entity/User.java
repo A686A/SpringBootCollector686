@@ -14,11 +14,6 @@ public class User {
     private int id;
     //@TableField("table-coumlon-name") 表里的字段名和类的属性名不一致
     private String username;
-    private String gender;
-    private String birthday;
-    private String password;
-    //@TableField(exist = false)此字段表里不一定百分之百有
-    @TableField(exist = false)
-    private List<Order> orders;
-
+    private String email;
+    private String createdAt;
 }

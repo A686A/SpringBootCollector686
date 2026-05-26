@@ -13,9 +13,6 @@ public interface UserMapper extends BaseMapper<User> {
     @Select("select * from user")
     List<User> find();
 
-    @Insert("insert into user(id,username,gender,password,birthday) value (#{id},#{username},#{gender},#{password},#{birthday})")
-    int insert(User user);
-
     //   查询用户，根据用户id查询信息   select * from user where id =
     @Select("select * from user where id = #{id}")
     User selectById(int id);
